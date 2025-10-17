@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面加载中</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 10px;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+        .container {
+            margin-top: 66px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 9px 50px;
+            background-color: #1AAD19;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 30px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #179b17;
+        }
+        h3 {
+            color: #333;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="normalContainer">
+        <img src="https://t7.baidu.com/it/u=3834513638,3568162266&fm=193&f=GIF" alt="加载中" width="100">
+        <h3>正在加载页面...</h3>
+        <p>点击下方按钮打开页面</p>
+        <button class="btn" id="jumpBtn">点击打开</button>
+    </div>
+    <div class="container hidden" id="loadingContainer">
+        <p>正在跳转，请稍候...</p>
+    </div>
 
+    <script>
+        // 获取URL中的u参数
+        function getParameterByName(name) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(window.location.href);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // 检测是否在微信或QQ环境
+        function isWechatOrQQ() {
+            var userAgent = navigator.userAgent.toLowerCase();
+            return userAgent.indexOf('micromessenger') > -1 || userAgent.indexOf('qq') > -1;
+        }
+
+        // 执行跳转
+        function doJump(url) {
+            if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
+                window.location.href = url;
+            } else {
+                document.body.innerHTML = '<p>无效的URL格式，请确保链接以http://或https://开头</p>';
+            }
+        }
+
+        // 主逻辑
+        window.onload = function() {
+            var targetUrl = getParameterByName('u');
+            var normalContainer = document.getElementById('normalContainer');
+            var loadingContainer = document.getElementById('loadingContainer');
+            var jumpBtn = document.getElementById('jumpBtn');
+
+            if (!targetUrl) {
+                document.body.innerHTML = '<p>未找到u参数，请在URL后添加?u=目标链接</p>';
+                return;
+            }
+
+            // 设置按钮跳转事件
+            jumpBtn.onclick = function() {
+                normalContainer.classList.add('hidden');
+                loadingContainer.classList.remove('hidden');
+                doJump(targetUrl);
+            };
+
+            // 判断环境决定是否自动跳转
+            if (!isWechatOrQQ()) {
+                // 非微信/QQ环境，自动跳转
+                normalContainer.classList.add('hidden');
+                loadingContainer.classList.remove('hidden');
+                // 轻微延迟增强体验
+                setTimeout(function() {
+                    doJump(targetUrl);
+                }, 500);
+            }
+        };
+    </script>
+</body>
+</html>
