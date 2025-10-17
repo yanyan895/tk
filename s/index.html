@@ -8,30 +8,45 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 10px;
             background-color: #f5f5f5;
             margin: 0;
+            min-height: 66vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
         }
         .container {
-            margin-top: 66px;
+            width: 100%;
+            max-width: 400px;
         }
         .btn {
             display: inline-block;
-            padding: 9px 50px;
+            padding: 12px 60px;
             background-color: #1AAD19;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 30px;
+            border-radius: 8px;
+            margin-top: 40%;
             border: none;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
+            width: 80%;
+            max-width: 300px;
         }
         .btn:hover {
             background-color: #179b17;
+            transform: scale(1.02);
         }
         h3 {
             color: #333;
+            font-size: 20px;
+            margin: 20px 0 10px;
+        }
+        p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 0;
         }
         .hidden {
             display: none;
@@ -39,70 +54,56 @@
     </style>
 </head>
 <body>
-    <div class="container" id="normalContainer">
-        <img src="https://t7.baidu.com/it/u=3834513638,3568162266&fm=193&f=GIF" alt="加载中" width="100">
+    <div class="container hidden" id="normalContainer">
+        <img src="https://tuike.dbdb.vip/static/img/succ.png" alt="加载中" width="100">
         <h3>正在加载页面...</h3>
-        <p>点击下方按钮打开页面</p>
         <button class="btn" id="jumpBtn">点击打开</button>
     </div>
-    <div class="container hidden" id="loadingContainer">
-        <p>正在跳转，请稍候...</p>
-    </div>
-
     <script>
-        // 获取URL中的u参数
-        function getParameterByName(name) {
-            name = name.replace(/[\[\]]/g, '\\$&');
-            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-                results = regex.exec(window.location.href);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        function getUrlParameters() {
+            const params = {};
+            const queryString = window.location.search.slice(1);
+            if (!queryString) return params;
+            queryString.split('&').forEach(pair => {
+                const [key, value] = pair.split('=').map(decodeURIComponent);
+                if (key) params[key] = value || '';
+            });
+            return params;
         }
-
-        // 检测是否在微信或QQ环境
+        function generateETime() {
+            const tenMinutesLater = Date.now() + 600000;
+            return btoa(tenMinutesLater.toString());
+        }
         function isWechatOrQQ() {
-            var userAgent = navigator.userAgent.toLowerCase();
+            const userAgent = navigator.userAgent.toLowerCase();
             return userAgent.indexOf('micromessenger') > -1 || userAgent.indexOf('qq') > -1;
         }
-
-        // 执行跳转
         function doJump(url) {
             if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
                 window.location.href = url;
             } else {
-                document.body.innerHTML = '<p>无效的URL格式，请确保链接以http://或https://开头</p>';
+                document.body.innerHTML = '<p>无效的URL</p>';
             }
         }
-
-        // 主逻辑
-        window.onload = function() {
-            var targetUrl = getParameterByName('u');
-            var normalContainer = document.getElementById('normalContainer');
-            var loadingContainer = document.getElementById('loadingContainer');
-            var jumpBtn = document.getElementById('jumpBtn');
-
-            if (!targetUrl) {
-                document.body.innerHTML = '<p>未找到u参数，请在URL后添加?u=目标链接</p>';
+        window.onload = function () {
+            const params = getUrlParameters();
+            const u = params.u;
+            const hid = params.hid;
+            if (!u || !hid) {
+                document.body.innerHTML = '<p>缺少必要参数，页面加载失败！</p>';
                 return;
             }
-
-            // 设置按钮跳转事件
-            jumpBtn.onclick = function() {
-                normalContainer.classList.add('hidden');
-                loadingContainer.classList.remove('hidden');
-                doJump(targetUrl);
-            };
-
-            // 判断环境决定是否自动跳转
-            if (!isWechatOrQQ()) {
-                // 非微信/QQ环境，自动跳转
-                normalContainer.classList.add('hidden');
-                loadingContainer.classList.remove('hidden');
-                // 轻微延迟增强体验
-                setTimeout(function() {
+            const eTime = generateETime();
+            const targetUrl = `${u}/ctk/h/?&hid=${encodeURIComponent(hid)}&eTime=${encodeURIComponent(eTime)}`;
+            const normalContainer = document.getElementById('normalContainer');
+            const jumpBtn = document.getElementById('jumpBtn');
+            if (isWechatOrQQ()) {
+                normalContainer.classList.remove('hidden');
+                jumpBtn.onclick = function () {
                     doJump(targetUrl);
-                }, 500);
+                };
+            } else {
+                doJump(targetUrl);
             }
         };
     </script>
