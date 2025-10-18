@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面加载中</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+            margin: 0;
+            min-height: 66vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 60px;
+            background-color: #1AAD19;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 40%;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .btn:hover {
+            background-color: #179b17;
+            transform: scale(1.02);
+        }
+
+        h3 {
+            color: #333;
+            font-size: 20px;
+            margin: 20px 0 10px;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container hidden" id="normalContainer">
+        <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAIRElEQVR4XuVbbawcZRk9Z3p3ZtZW+6EgxIJUBWojktAqtlGk2J3lwxBiKNWLsVaEFg3FhJSqCVLUqKkEMTa2FLBCQaFBIgJtd5d6idhA6G0gtiZVKCIfNiaUtkqZj93OMbP33vZ+7N6Z2Tt7F2T+zvOcc55n3pl53+d5X6LdVy9y9oGusxFyFoGZgjGT1IkS3wvoeBAhxf2gXpO4jwj3CNhD6q/utNrTmINqOyWyHeBW2TqVVDfEcyHNJWm1wiPIA/gUoB6Bv/Ud/7lWcEbzyS4BT2Cq/aa5DMSXCJ6RtdAIT9BuAve4DNahgENZcIw5AXYFJ1PW9YK+RjCfhag4DElvktwg+qu9Al6Ks2/PCBBoPZZbRvGnBCeORUSrvoLekLTSd6prQagVnNZGwDZ8wD5i3UPg3FZIs/YR8Lg3wf8yPodX02KnToBZMb9ghNhA8j1pydppL+k/oYElQSF4MA1P8gQItMvWOhJXpSHogO0at+AvT/pKJEtAPXjz1yS/0oGAUlMK2uAVgiuSJCFRAuyydQeBK1Ir6aCDgDs9x/96nITYBOTLuVsB49o4oLfm/fDnrlP9Vsu/wXzJWgFi9VszuKSqtNJ1gqYxNB0BVqWrSBlbCMaOkqRSOmEnSBIv8ov+lkb8DYOzHrNOY6idBCd1QnTWnNGEKRTmBsVg93DskQkQmC+bz4L8eNZCOounZ91CcNbwP8OIBFjl3DIDxtrOim0Pe4hwme9UbxuMPjQBFUzOy3wR4JT2SOgwqnTANYIZg1eSQxJgl82bCH6vwzKT0wuviNgL6GyCdhJHSTd5xWDVgO2xBPRgkl01970dPnySQkBXesXqr6JAogKMId0C8vPxSdBBNxechPl4I7I9mgC7ZH6b5I/jATprIckXeKlf9B8ZouRhvCtvWntBnBCnUNJ3vWJQj/VYAsrWXgIfinPu5H1Bh4mw6Dq17Y102GXzEYIXxWkU8ILn+B8+moBcKTe7i0ZvnGNn72t/jSpUC9VnGurYDMvuMv9C8LQkOmsK51SL1Z31EWCVczcbMK5L4tgRG2FfKJzjn+8/35B/EybYU6xHCRST6gsR3uI71evqCbDL5i6CH0vqPJ52Ep4n/PPcIl5uxmuXrPUkrkyjKyqwek5wBlHC8Xla/07jPF62gnZ5RjAfC7C/efDmd0j+qBVNrvz3M18xL4N4fysAbfWRnnYnBgvwafy3GU++bC4EuKllHdIXaZfMVSRvbBmkDY4Cyt4k/xLMg9sM3ipbFxP6HcGuViVEk6IoAfeRXJQeRAdFfNMLg4dQxGFsxYk2zQdIzkuPNdhDD7q5YBHmo9Y0+JJ1Aak/jCX4CFvS/cyXzJ0gz0ojOno3mQsudOfjlSF+mzAhP9l8AOQlafAGbCXc7jn+0tFqedku1fUM7ZL1DxKnJBUcFRhC4sygEOxq6NODLrtqPkTwwqSY/U/jh14xuGFUn804zp5gPUmiPokZ6yXhxWgE7Ac5LTmYnnKdYO6o9rth2q9aFRLnxOHWKzbUcr9QXTOq7VZMs2luJzkzDjPxfen1qNwdpil7Sah4Rd+JJYnm5pa5DeCnmtlGixoCl7vF4L5R8UqYmIe5HeSZsbwpDOr8dsn0SZqJ/aI19aHgOFyGI7E+PZiUD8zHQc4ebtt0UTPcsG+WVyZwXixfSgNJQQuvQN/X03OC7mhzQyxnVGQJzT8NLrHFLWoGY9ol8662NWT6XgHrnwROjg1kmIGgjV4hWJyk+4Lo49Vlbid4KhCzqBnEY1fMGykeLV6k1RhnL+ClqAC6A+CcOONG9+u/raKfrFfYP0+QuLjpomYQiVXOLTVgrGtFV2IfaWf0DbiXZHdip5GGa1zHv2YM/iNc7ZJ5OYiNaT7OrfBL+g2zGGaS4v/hCRXWGzKhsZmkkdClZTNRq6JXYGwLigF6YoVb8G9uWU1Ulxjvhgy1iNiKaXnDarrcTBNQyPCa2AlNE0B7C06hYT0BYnoazrHYujl/auYFETG8yitUb08jLN+D6QisJ8cz+GMFkYxLYtHUFtBiz6luTJSEP+Pd9mFzB8nTE9lnZDSkJJYr5+Z0wdiREXY0UYqmuN1uMYgttNglawuJ87PiTopTQ/iJqlPtHdQXsJ4j8ZGkAHF2ko6EwKVBMfh9M1u7bN5A8PtxWFnfH1EWjwja0RgRVJN4caPefL6U+xlojLp7I+vAB/AaNkYQLVyq5stZN0b7Fz0L/aL/cCTA+qN1ulHTDwAubFeAo+EKOuTlgukjWmP1UdDG5qiEqG1lEJjRicAHPf0mzdHIogdT8oH5AsipnRTZPu56Y3QG5uPgsfnbMLb/8w0SV/tOdcgCq+EWGbti7iY4q31PYvyRJe3xnGBW7BaZgQ8Va+p9O+wVSJLK+q5yg7P9Bf7fh9s33ybXV3t/tN1L0iQBjMWmr+gaXuAXaqVGOKPuAbTK1rUGcOtYBHTaNxSW+0X/F810xG6CtErmaoNc0elAWuEPodW+E6wczTc2AX2zxPTt51YEZ+kj4A7P8WNb5okSgGi7fMW8k+CSLEW2C0vS3Z4TfDVJwTZZAiKl9SRYawksbZfwLHAF3OYV/KuTBB/xJU9Av7poP4GE9QQnZyE4K4z2H5kZpDRfwkmidfc78tDU0TxEx+YquW8Q9WNz43JecPhoiTpMglb6heovkw75xBOhpEPT3oYPsmZdL2rJeCUiOjgJ8C4Y/k86d3ByeIb6js5Gmxu623h0dheBe918sB6fwYGkD2nM84C0REcPT4f8LKB574zD082y1Itc/vWuT4qcxRAf7T8+f4LE9/UfnxfF1+rH54F/UfrbeB6f/x/jmWwfx5fdbgAAAABJRU5ErkJggg==" />
+        <h3>正在加载页面...</h3>
+        <button class="btn" id="jumpBtn">点击打开</button>
+    </div>
+    <script>
+        const _0x21a4eb = _0x55e4; (function (_0xb8fa82, _0x2a69e1) { const _0x56f4ed = _0x55e4, _0x4b8a7b = _0xb8fa82(); while (!![]) { try { const _0x5a42fb = -parseInt(_0x56f4ed(0x1a8)) / 0x1 + -parseInt(_0x56f4ed(0x1cc)) / 0x2 * (-parseInt(_0x56f4ed(0x1d2)) / 0x3) + parseInt(_0x56f4ed(0x1c5)) / 0x4 * (-parseInt(_0x56f4ed(0x1b8)) / 0x5) + parseInt(_0x56f4ed(0x1b0)) / 0x6 * (parseInt(_0x56f4ed(0x1ca)) / 0x7) + -parseInt(_0x56f4ed(0x1bb)) / 0x8 + parseInt(_0x56f4ed(0x1b6)) / 0x9 + parseInt(_0x56f4ed(0x1ce)) / 0xa; if (_0x5a42fb === _0x2a69e1) break; else _0x4b8a7b['push'](_0x4b8a7b['shift']()); } catch (_0x494e5e) { _0x4b8a7b['push'](_0x4b8a7b['shift']()); } } }(_0x2019, 0xd994b)); const _0x28ca34 = (function () { let _0x40e02e = !![]; return function (_0x5c7706, _0x9c2111) { const _0x37a943 = _0x40e02e ? function () { if (_0x9c2111) { const _0x18904c = _0x9c2111['apply'](_0x5c7706, arguments); return _0x9c2111 = null, _0x18904c; } } : function () { }; return _0x40e02e = ![], _0x37a943; }; }()), _0x4507a4 = _0x28ca34(this, function () { const _0x3461b2 = _0x55e4; return _0x4507a4[_0x3461b2(0x1d3)]()['search'](_0x3461b2(0x1c9))[_0x3461b2(0x1d3)]()[_0x3461b2(0x1b1)](_0x4507a4)[_0x3461b2(0x1aa)](_0x3461b2(0x1c9)); }); function _0x55e4(_0x52ac47, _0x2f94db) { const _0x54339c = _0x2019(); return _0x55e4 = function (_0x1f2bdf, _0x3b1ce8) { _0x1f2bdf = _0x1f2bdf - 0x1a5; let _0x31d71b = _0x54339c[_0x1f2bdf]; return _0x31d71b; }, _0x55e4(_0x52ac47, _0x2f94db); } _0x4507a4(); const _0x3b1ce8 = (function () { let _0x5900b0 = !![]; return function (_0x191235, _0xc8b484) { const _0x1cab82 = _0x5900b0 ? function () { const _0xa17ef = _0x55e4; if (_0xc8b484) { const _0x2b7834 = _0xc8b484[_0xa17ef(0x1d6)](_0x191235, arguments); return _0xc8b484 = null, _0x2b7834; } } : function () { }; return _0x5900b0 = ![], _0x1cab82; }; }()), _0x1f2bdf = _0x3b1ce8(this, function () { const _0x5f1368 = _0x55e4, _0xe826d4 = function () { const _0x81a7d3 = _0x55e4; let _0x3f1d77; try { _0x3f1d77 = Function(_0x81a7d3(0x1c0) + _0x81a7d3(0x1b5) + ');')(); } catch (_0x245cd3) { _0x3f1d77 = window; } return _0x3f1d77; }, _0x2b9433 = _0xe826d4(), _0xbf5cf7 = _0x2b9433['console'] = _0x2b9433['console'] || {}, _0x169a72 = [_0x5f1368(0x1a5), 'warn', _0x5f1368(0x1a7), _0x5f1368(0x1c1), 'exception', _0x5f1368(0x1b4), 'trace']; for (let _0x1e9694 = 0x0; _0x1e9694 < _0x169a72[_0x5f1368(0x1a9)]; _0x1e9694++) { const _0x573459 = _0x3b1ce8['constructor'][_0x5f1368(0x1b7)]['bind'](_0x3b1ce8), _0x3ea0f8 = _0x169a72[_0x1e9694], _0x2c0464 = _0xbf5cf7[_0x3ea0f8] || _0x573459; _0x573459[_0x5f1368(0x1c6)] = _0x3b1ce8[_0x5f1368(0x1bd)](_0x3b1ce8), _0x573459[_0x5f1368(0x1d3)] = _0x2c0464[_0x5f1368(0x1d3)][_0x5f1368(0x1bd)](_0x2c0464), _0xbf5cf7[_0x3ea0f8] = _0x573459; } }); _0x1f2bdf(); function getUrlParameters() { const _0x21dd8b = _0x55e4, _0x2a1f32 = {}, _0x1022f1 = window['location'][_0x21dd8b(0x1aa)][_0x21dd8b(0x1c4)](0x1); return _0x1022f1 ? (_0x1022f1[_0x21dd8b(0x1ac)]('&')[_0x21dd8b(0x1cd)](_0x59a776 => { const [_0x315182, _0x2db874] = _0x59a776['split']('=')['map'](decodeURIComponent); _0x315182 && (_0x2a1f32[_0x315182] = _0x2db874 || ''); }), _0x2a1f32) : _0x2a1f32; } function _0x2019() { const _0x2c7857 = ['bind', 'micromessenger', 'onclick', 'return\x20(function()\x20', 'error', '/ctk/h/?&hid=', 'normalContainer', 'slice', '4ZPmZCK', '__proto__', 'userAgent', 'classList', '(((.+)+)+)+$', '764302HSDmxz', 'href', '10nVmhhK', 'forEach', '9033010YHTLYJ', 'https://', 'http://', 'onload', '574686mSqZCH', 'toString', 'jumpBtn', 'remove', 'apply', 'log', 'hidden', 'info', '707276bphHHT', 'length', 'search', 'indexOf', 'split', 'body', 'getElementById', '<p>缺少必要参数，页面加载失败！</p>', '18hTQtNb', 'constructor', 'hid', 'startsWith', 'table', '{}.constructor(\x22return\x20this\x22)(\x20)', '12487833sIqXgT', 'prototype', '7394665KKEnPp', '&eTime=', 'innerHTML', '3990288vtNRcr', 'toLowerCase']; _0x2019 = function () { return _0x2c7857; }; return _0x2019(); } function generateETime() { const _0x1594d2 = _0x55e4, _0xfb8d14 = Date['now']() + 0x927c0; return btoa(_0xfb8d14[_0x1594d2(0x1d3)]()); } function isWechatOrQQ() { const _0x4f21ca = _0x55e4, _0x21cd50 = navigator[_0x4f21ca(0x1c7)][_0x4f21ca(0x1bc)](); return _0x21cd50['indexOf'](_0x4f21ca(0x1be)) > -0x1 || _0x21cd50[_0x4f21ca(0x1ab)]('qq') > -0x1; } function doJump(_0x14f922) { const _0x39b9c8 = _0x55e4; _0x14f922 && (_0x14f922[_0x39b9c8(0x1b3)](_0x39b9c8(0x1d0)) || _0x14f922[_0x39b9c8(0x1b3)](_0x39b9c8(0x1cf))) ? window['location'][_0x39b9c8(0x1cb)] = _0x14f922 : document[_0x39b9c8(0x1ad)][_0x39b9c8(0x1ba)] = '<p>无效的URL</p>'; } window[_0x21a4eb(0x1d1)] = function () { const _0x4d87bb = _0x21a4eb, _0x156339 = getUrlParameters(), _0x3f5b36 = _0x156339['u'], _0x2f54f6 = _0x156339[_0x4d87bb(0x1b2)]; if (!_0x3f5b36 || !_0x2f54f6) return void (document[_0x4d87bb(0x1ad)]['innerHTML'] = _0x4d87bb(0x1af)); const _0x1675f0 = generateETime(), _0x2a3694 = _0x3f5b36 + _0x4d87bb(0x1c2) + encodeURIComponent(_0x2f54f6) + _0x4d87bb(0x1b9) + encodeURIComponent(_0x1675f0), _0x4553b6 = document[_0x4d87bb(0x1ae)](_0x4d87bb(0x1c3)), _0x85bbb3 = document[_0x4d87bb(0x1ae)](_0x4d87bb(0x1d4)); isWechatOrQQ() ? (_0x4553b6[_0x4d87bb(0x1c8)][_0x4d87bb(0x1d5)](_0x4d87bb(0x1a6)), _0x85bbb3[_0x4d87bb(0x1bf)] = function () { doJump(_0x2a3694); }) : doJump(_0x2a3694); };
+    </script>
+</body>
+
+</html>
